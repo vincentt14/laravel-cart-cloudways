@@ -80,13 +80,18 @@
                     </td>
 
                     <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                      <select name="quantity" id="quantity" value="{{ $value['quantity'] }}">
-                        @for ($i = 1; $i <= 10; $i++)
-                          <option value="{{ $i }}">
-                            {{ $i }}
-                          </option>
-                        @endfor
-                      </select>
+                      <form method="post" action="{{ route('update.from.cart', $key) }}">
+                        @csrf
+                        @method('put')
+                        <select name="quantity" id="quantity" value="{{ $value['quantity'] }}"
+                          onChane="this.form.submit()">
+                          @for ($i = 1; $i <= 10; $i++)
+                            <option value="{{ $i }}" {{ $value['quantity'] == $i ? 'selected' : '' }}>
+                              {{ $i }}
+                            </option>
+                          @endfor
+                        </select>
+                      </form>
                     </td>
 
                     <td class="whitespace-nowrap px-6 py-4">
